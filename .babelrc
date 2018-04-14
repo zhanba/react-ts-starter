@@ -1,0 +1,22 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["last 2 versions"]
+        },
+        "useBuiltIns": "entry"
+      }
+    ],
+
+    "@babel/react"
+  ],
+  "comments": true,
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-syntax-dynamic-import",
+    "lodash"
+  ]
+}

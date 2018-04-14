@@ -1,0 +1,12 @@
+{
+  "watch": [
+    "build/",
+    "src/assets/style/",
+    ".babelrc",
+    "tsconfig.json",
+    "tslint.json",
+    "package.json"
+  ],
+  "exec": "ts-node --project build/tsconfig-for-webpack-config.json build/dev-server.ts",
+  "ext": "js json less ts tsx"
+}
