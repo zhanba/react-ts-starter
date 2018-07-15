@@ -1,7 +1,7 @@
-import { applyMiddleware, compose, createStore, GenericStoreEnhancer } from 'redux'
+import { applyMiddleware, compose, createStore, StoreEnhancer } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga'
-import reducers, { IGlobalState } from '../rootReducer'
+import reducers from '../rootReducer'
 import sagas from '../rootSagas'
 
 import { routerMiddleware } from 'react-router-redux'
@@ -15,25 +15,18 @@ const routerReduxMiddleware = routerMiddleware(history)
 
 const middlewares = [sagaMiddleware, routerReduxMiddleware]
 
-let enhancer: GenericStoreEnhancer
+let enhancer: StoreEnhancer
 
 if (process.env.NODE_ENV === 'development') {
-  enhancer = composeWithDevTools(
-    applyMiddleware(...middlewares)
-  )
+  enhancer = composeWithDevTools(applyMiddleware(...middlewares))
 }
 
 if (process.env.NODE_ENV === 'production') {
-  enhancer = compose(
-    applyMiddleware(...middlewares)
-  )
+  enhancer = compose(applyMiddleware(...middlewares))
 }
 
 export default function configureStore() {
-  const store = createStore<IGlobalState>(
-    reducers,
-    enhancer
-  )
+  const store = createStore(reducers, enhancer)
   sagaMiddleware.run(sagas)
   return store
 }

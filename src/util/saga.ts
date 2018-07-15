@@ -4,7 +4,7 @@
 import { AxiosPromise, AxiosResponse } from 'axios'
 import { SagaIterator } from 'redux-saga'
 import { call, cancelled, fork, put, takeEvery } from 'redux-saga/effects'
-import { Action, ActionCreator, AsyncActionCreators, EmptyActionCreator } from 'typescript-fsa'
+import { Action, ActionCreator, AsyncActionCreators } from 'typescript-fsa'
 
 export function bindAsyncAction<R>(
   actionCreators: AsyncActionCreators<void, R, any>
@@ -106,12 +106,6 @@ function setFunctionName<F extends Function>(func: F, name: string): F {
  * @param asyncAction 异步action
  * @param asyncCall 异步调用，一般为api调用，调用成功触发异步action的success回调，payload包含异步调用成功的返回值
  */
-export function takeAsyncAction<S, E>(
-  action: EmptyActionCreator,
-  asyncAction: AsyncActionCreators<any, S, E>,
-  asyncCall: () => AxiosPromise<S>
-): any
-
 export function takeAsyncAction<P, S, E>(
   action: ActionCreator<P>,
   asyncAction: AsyncActionCreators<P, S, E>,

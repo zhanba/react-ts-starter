@@ -57,6 +57,7 @@ const lessLoader = {
   loader: 'less-loader',
   options: {
     modifyVars: config.themeVariables,
+    javascriptEnabled: true,
   },
 }
 
