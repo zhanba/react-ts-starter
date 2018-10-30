@@ -16,7 +16,7 @@ const tsLoader = {
       before: [
         tsImportPluginFactory({
           libraryName: 'antd',
-          libraryDirectory: 'lib',
+          libraryDirectory: 'es',
           style: true,
         }),
       ],

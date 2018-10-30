@@ -25,9 +25,9 @@ const proxyTable = {
 
 const config = {
   path: {
-    publicPath: '.',
+    publicPath: '/',
     srcPath: resolvePath('src'),
-    outputPath: resolvePath('../dist'),
+    outputPath: resolvePath('dist'),
     testPath: resolvePath('test'),
     rootPath: resolvePath(''),
     assetsPath,

@@ -4,7 +4,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
 import App from './App'
-import configureStore from './redux/configureStore'
+import configureStore from './configureStore'
 
 const store = configureStore()
 

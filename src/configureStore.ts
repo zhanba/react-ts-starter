@@ -1,10 +1,10 @@
 import { applyMiddleware, compose, createStore, StoreEnhancer } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga'
-import reducers from '../rootReducer'
-import sagas from '../rootSagas'
+import reducers from './rootReducer'
+import sagas from './rootSagas'
 
-import { routerMiddleware } from 'react-router-redux'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
 
 import createHistory from 'history/createHashHistory'
 
@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export default function configureStore() {
-  const store = createStore(reducers, enhancer)
+  const store = createStore(connectRouter(history)(reducers), enhancer)
   sagaMiddleware.run(sagas)
   return store
 }

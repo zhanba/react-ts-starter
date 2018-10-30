@@ -9,7 +9,7 @@ import commonConfig from './webpack.config.base'
 
 const webpackConfig = webpackMerge(commonConfig, {
   mode: 'development',
-  entry: ['./index.dev.tsx'],
+  entry: ['./index.tsx'],
   output: {
     path: config.path.outputPath,
     filename: 'bundle.js',
