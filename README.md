@@ -17,3 +17,10 @@
 npm install
 npm start
 ```
+
+## TODO
+
+- hooks
+- test
+- storybook!
+- reduce dep
