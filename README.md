@@ -8,8 +8,8 @@
 - CSSModules / LESS
 - TsLint / prettier (with vscode config to intergrate all tools)
 - Antd + custom theme file
-- Nodemon to restart webpack
-- careful! no package-lock.json (if you want, delete .npmrc)
+- Nodemon to restart webpack when you change config file
+- no package-lock.json (if you want lock file, delete .npmrc)
 
 ## Usage
 
