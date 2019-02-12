@@ -1,4 +1,3 @@
-// import ForkTsCheckerNotifierWebpackPlugin from 'fork-ts-checker-notifier-webpack-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import { resolve } from 'path'
 import * as webpack from 'webpack'
@@ -39,7 +38,8 @@ const webpackConfig = webpackMerge(commonConfig, {
         exclude: /node_modules/, // exclude antd default style
         use: [
           util.loaders.styleLoader,
-          util.loaders.TypingsLessModulesLoader,
+          // util.loaders.TypingsLessModulesLoader,
+          util.loaders.cssLoader,
           util.loaders.postcssLoader,
           util.loaders.lessLoader,
         ],
@@ -65,11 +65,6 @@ const webpackConfig = webpackMerge(commonConfig, {
       tslint: resolve(config.path.rootPath, './tslint.json'),
       watch: resolve(config.path.srcPath),
     }),
-    // new ForkTsCheckerNotifierWebpackPlugin({
-    //   title: 'TypeScript',
-    //   excludeWarnings: false,
-    //   skipSuccessful: true,
-    // }),
   ],
 })
 
