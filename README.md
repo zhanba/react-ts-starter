@@ -23,3 +23,5 @@ npm start
 - test
 - storybook!
 - reduce dep
+
+downgrade webpack to 4.28 for https://github.com/webpack/webpack/issues/8656
