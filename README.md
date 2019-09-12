@@ -1,5 +1,7 @@
 # React Typescript starter
 
+[![Build Status](https://zhanba.visualstudio.com/github/_apis/build/status/zhanba.react-ts-starter?branchName=master)](https://zhanba.visualstudio.com/github/_build/latest?definitionId=1&branchName=master)
+
 ## Feature
 
 - React 16 /redux 4 /redux-saga /React-Router 4
