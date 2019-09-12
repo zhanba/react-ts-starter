@@ -3,7 +3,7 @@ import { resolve } from 'path'
 import * as webpack from 'webpack'
 import webpackMerge from 'webpack-merge'
 import config from './config'
-import util from './util'
+import * as util from './util'
 import commonConfig from './webpack.config.base'
 
 const webpackConfig = webpackMerge(commonConfig, {
@@ -31,28 +31,23 @@ const webpackConfig = webpackMerge(commonConfig, {
       {
         test: /\.css$/,
         exclude: /node_modules/, // exclude antd default style
-        use: [util.loaders.styleLoader, util.loaders.cssLoader],
+        use: [util.styleLoader, util.cssLoader],
       },
       {
         test: /\.less$/,
         exclude: /node_modules/, // exclude antd default style
         use: [
-          util.loaders.styleLoader,
-          // util.loaders.TypingsLessModulesLoader,
-          util.loaders.cssLoader,
-          util.loaders.postcssLoader,
-          util.loaders.lessLoader,
+          util.styleLoader,
+          util.typeCssModulesLoader,
+          util.cssModulesLoader,
+          util.postcssLoader,
+          util.lessLoader,
         ],
       },
       {
         test: /\.less$/,
         include: /node_modules/, // parse antd style , no css modules option
-        use: [
-          util.loaders.styleLoader,
-          util.loaders.cssLoader,
-          util.loaders.postcssLoader,
-          util.loaders.lessLoader,
-        ],
+        use: [util.styleLoader, util.cssLoader, util.postcssLoader, util.lessLoader],
       },
     ],
   },

@@ -4,7 +4,7 @@ import * as webpack from 'webpack'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import webpackMerge from 'webpack-merge'
 import config from './config'
-import util from './util'
+import * as util from './util'
 import commonConfig from './webpack.config.base'
 
 const webpackConfig = webpackMerge(commonConfig, {
@@ -32,16 +32,11 @@ const webpackConfig = webpackMerge(commonConfig, {
       {
         test: /\.css$/,
         exclude: /node_modules/, // exclude antd default style
-        use: [MiniCssExtractPlugin.loader, util.loaders.cssLoader],
+        use: [MiniCssExtractPlugin.loader, util.cssLoader],
       },
       {
         test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          util.loaders.cssLoader,
-          util.loaders.postcssLoader,
-          util.loaders.lessLoader,
-        ],
+        use: [MiniCssExtractPlugin.loader, util.cssLoader, util.postcssLoader, util.lessLoader],
       },
     ],
   },

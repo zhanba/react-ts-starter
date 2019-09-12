@@ -1,14 +1,14 @@
 import tsImportPluginFactory from 'ts-import-plugin'
 import config from './config'
 
-const babelLoader = {
+export const babelLoader = {
   loader: 'babel-loader',
   options: {
     cacheDirectory: true,
   },
 }
 
-const tsLoader = {
+export const tsLoader = {
   loader: 'ts-loader',
   options: {
     transpileOnly: true,
@@ -24,15 +24,15 @@ const tsLoader = {
   },
 }
 
-const styleLoader = {
+export const styleLoader = {
   loader: 'style-loader', // creates style nodes from JS strings
 }
 
-const cssLoader = {
+export const cssLoader = {
   loader: 'css-loader', // translates CSS into CommonJS
 }
 
-const cssModulesLoader = {
+export const cssModulesLoader = {
   loader: 'css-loader',
   options: {
     importLoaders: 2, // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
@@ -40,38 +40,14 @@ const cssModulesLoader = {
   },
 }
 
-const TypingsLessModulesLoader = {
-  loader: 'typings-for-css-modules-loader',
-  options: {
-    importLoaders: 2,
-    modules: true,
-    namedExport: true,
-    camelCase: true,
-    localIdentName: '[name]__[local]___[hash:base64:5]',
-  },
-}
+export const typeCssModulesLoader = 'css-modules-typescript-loader'
 
-const postcssLoader = 'postcss-loader'
+export const postcssLoader = 'postcss-loader'
 
-const lessLoader = {
+export const lessLoader = {
   loader: 'less-loader',
   options: {
     modifyVars: config.themeVariables,
     javascriptEnabled: true,
   },
 }
-
-const util = {
-  loaders: {
-    babelLoader,
-    tsLoader,
-    styleLoader,
-    cssLoader,
-    cssModulesLoader,
-    TypingsLessModulesLoader,
-    postcssLoader,
-    lessLoader,
-  },
-}
-
-export default util

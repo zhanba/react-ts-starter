@@ -9,5 +9,5 @@ export const actions = {
 }
 
 export const asyncActions = {
-  sync: actionCreator.async<any, any, any>('SYNC'),
+  sync: actionCreator.async<unknown, unknown, unknown>('SYNC'),
 }

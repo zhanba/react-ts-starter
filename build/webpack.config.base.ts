@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import * as path from 'path'
 import * as webpack from 'webpack'
 import config from './config'
-import util from './util'
+import * as util from './util'
 
 const baseConfig = {
   context: config.path.srcPath,
@@ -13,19 +13,14 @@ const baseConfig = {
   },
   module: {
     rules: [
-      // {
-      //   enforce: 'pre',
-      //   test: /\.js$/,
-      //   use: 'source-map-loader',
-      // },
       {
         test: /\.js$/,
-        use: util.loaders.babelLoader,
+        use: util.babelLoader,
         exclude: /(node_modules|dist)/,
       },
       {
         test: /\.tsx?$/,
-        use: [util.loaders.babelLoader, util.loaders.tsLoader],
+        use: [util.babelLoader, util.tsLoader],
         exclude: /node_modules/,
       },
       {
