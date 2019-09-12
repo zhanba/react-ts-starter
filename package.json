@@ -7,6 +7,7 @@
     "dev": "nodemon",
     "build": "cross-env TS_NODE_PROJECT=\"build/tsconfig-for-webpack-config.json\" webpack --config build/webpack.config.prd.ts",
     "lint": "eslint src --fix --ext .ts,.tsx",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -57,9 +58,13 @@
     "css-loader": "^2.1.0",
     "css-modules-typescript-loader": "^3.0.0",
     "eslint": "^6.3.0",
+    "eslint-config-airbnb-typescript": "^4.0.1",
     "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^3.0.1",
     "fork-ts-checker-webpack-plugin": "^0.5.2",

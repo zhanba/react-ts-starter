@@ -1,29 +1,26 @@
-import { Breadcrumb, Icon, Layout, Menu } from 'antd'
-import * as React from 'react'
-import { connect } from 'react-redux'
-import { RouteComponentProps } from 'react-router'
-import { bindActionCreators } from 'redux'
-import { IGlobalState } from '../../rootReducer'
-import { actions as templateActions } from './actions'
+import { Breadcrumb, Icon, Layout, Menu } from 'antd';
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { GlobalState } from '../../rootReducer';
+import { actions as templateActions } from './actions';
 
-interface IStateProps {
-  testProp: string
+interface StateProps {
+  testProp: string;
 }
 
-interface IDispatchProps {
-  actions: typeof templateActions
+interface DispatchProps {
+  actions: typeof templateActions;
 }
 
-const { SubMenu } = Menu
-const { Header, Content, Sider } = Layout
+const { SubMenu } = Menu;
+const { Header, Content, Sider } = Layout;
 
-class Template extends React.Component<
-  IStateProps & IDispatchProps & RouteComponentProps<any>,
-  {}
-> {
+class Template extends React.Component<StateProps & DispatchProps & RouteComponentProps<any>, {}> {
   componentDidMount() {
-    const { actions } = this.props
-    actions.componentMounted()
+    const { actions } = this.props;
+    actions.componentMounted();
   }
 
   render() {
@@ -106,19 +103,19 @@ class Template extends React.Component<
           </Layout>
         </Layout>
       </Layout>
-    )
+    );
   }
 }
 
 export default connect(
-  (state: IGlobalState) => {
+  (state: GlobalState) => {
     return {
       testProp: 'test prop',
-    }
+    };
   },
   dispatch => {
     return {
       actions: bindActionCreators(templateActions, dispatch),
-    }
-  }
-)(Template)
+    };
+  },
+)(Template);

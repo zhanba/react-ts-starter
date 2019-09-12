@@ -1,15 +1,15 @@
-import '@babel/polyfill'
+import '@babel/polyfill';
 
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
-import App from './App'
-import configureStore from './configureStore'
+import App from './App';
+import configureStore from './configureStore';
 
-const store = configureStore()
+const store = configureStore();
 
 const render = (Component: React.ReactElement<any>) => {
-  ReactDOM.render(<div>{Component}</div>, document.getElementById('root'))
-}
+  ReactDOM.render(<div>{Component}</div>, document.getElementById('root'));
+};
 
-render(<App store={store} />)
+render(<App store={store} />);

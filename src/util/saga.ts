@@ -1,84 +1,10 @@
 // source https://github.com/aikoven/typescript-fsa-redux-saga/blob/master/src/index.ts
 // remove the throw error code from source
 
-import { AxiosPromise, AxiosResponse } from 'axios'
-import { SagaIterator } from 'redux-saga'
-import { call, cancelled, fork, put, takeEvery } from 'redux-saga/effects'
-import { Action, ActionCreator, AsyncActionCreators } from 'typescript-fsa'
-
-export function bindAsyncAction<R>(
-  actionCreators: AsyncActionCreators<void, R, any>
-): {
-  (worker: () => Promise<R> | SagaIterator): () => SagaIterator
-
-  (worker: (params: void) => Promise<R> | SagaIterator): (params: void) => SagaIterator
-
-  <A1>(worker: (params: void, arg1: A1) => Promise<R> | SagaIterator): (
-    params: void,
-    arg1: A1
-  ) => SagaIterator
-
-  <A1, A2>(worker: (params: void, arg1: A1, arg2: A2) => Promise<R> | SagaIterator): (
-    params: void,
-    arg1: A1,
-    arg2: A2
-  ) => SagaIterator
-
-  <A1, A2, A3>(
-    worker: (
-      params: void,
-      arg1: A1,
-      arg2: A2,
-      arg3: A3,
-      ...rest: any[]
-    ) => Promise<R> | SagaIterator
-  ): (params: void, arg1: A1, arg2: A2, arg3: A3, ...rest: any[]) => SagaIterator
-}
-export function bindAsyncAction<P, R>(
-  actionCreators: AsyncActionCreators<P, R, any>
-): {
-  (worker: (params: P) => Promise<R> | SagaIterator): (params: P) => SagaIterator
-
-  <A1>(worker: (params: P, arg1: A1) => Promise<R> | SagaIterator): (
-    params: P,
-    arg1: A1
-  ) => SagaIterator
-
-  <A1, A2>(worker: (params: P, arg1: A1, arg2: A2) => Promise<R> | SagaIterator): (
-    params: P,
-    arg1: A1,
-    arg2: A2
-  ) => SagaIterator
-
-  <A1, A2, A3>(
-    worker: (params: P, arg1: A1, arg2: A2, arg3: A3, ...rest: any[]) => Promise<R> | SagaIterator
-  ): (params: P, arg1: A1, arg2: A2, arg3: A3, ...rest: any[]) => SagaIterator
-}
-
-export function bindAsyncAction(actionCreator: AsyncActionCreators<any, any, any>) {
-  return (worker: (params: any, ...args: any[]) => Promise<any> | SagaIterator) => {
-    function* boundAsyncActionSaga(params: any, ...args: any[]): SagaIterator {
-      yield put(actionCreator.started(params))
-
-      try {
-        const result = yield (call as any)(worker, params, ...args)
-        yield put(actionCreator.done({ params, result }))
-        return result
-      } catch (error) {
-        yield put(actionCreator.failed({ params, error }))
-        // throw error
-      } finally {
-        if (yield cancelled()) {
-          yield put(actionCreator.failed({ params, error: 'cancelled' }))
-        }
-      }
-    }
-
-    const capName = worker.name.charAt(0).toUpperCase() + worker.name.substring(1)
-
-    return setFunctionName(boundAsyncActionSaga, `bound${capName}(${actionCreator.type})`)
-  }
-}
+import { AxiosPromise, AxiosResponse } from 'axios';
+import { SagaIterator } from 'redux-saga';
+import { call, cancelled, fork, put, takeEvery } from 'redux-saga/effects';
+import { Action, ActionCreator, AsyncActionCreators } from 'typescript-fsa';
 
 /**
  * Set function name.
@@ -92,12 +18,86 @@ function setFunctionName<F extends Function>(func: F, name: string): F {
     Object.defineProperty(func, 'name', {
       value: name,
       configurable: true,
-    })
+    });
   } catch (e) {
     // ignore
   }
 
-  return func
+  return func;
+}
+
+export function bindAsyncAction<R>(
+  actionCreators: AsyncActionCreators<void, R, any>,
+): {
+  (worker: () => Promise<R> | SagaIterator): () => SagaIterator;
+
+  (worker: (params: void) => Promise<R> | SagaIterator): (params: void) => SagaIterator;
+
+  <A1>(worker: (params: void, arg1: A1) => Promise<R> | SagaIterator): (
+    params: void,
+    arg1: A1,
+  ) => SagaIterator;
+
+  <A1, A2>(worker: (params: void, arg1: A1, arg2: A2) => Promise<R> | SagaIterator): (
+    params: void,
+    arg1: A1,
+    arg2: A2,
+  ) => SagaIterator;
+
+  <A1, A2, A3>(
+    worker: (
+      params: void,
+      arg1: A1,
+      arg2: A2,
+      arg3: A3,
+      ...rest: any[]
+    ) => Promise<R> | SagaIterator,
+  ): (params: void, arg1: A1, arg2: A2, arg3: A3, ...rest: any[]) => SagaIterator;
+};
+export function bindAsyncAction<P, R>(
+  actionCreators: AsyncActionCreators<P, R, any>,
+): {
+  (worker: (params: P) => Promise<R> | SagaIterator): (params: P) => SagaIterator;
+
+  <A1>(worker: (params: P, arg1: A1) => Promise<R> | SagaIterator): (
+    params: P,
+    arg1: A1,
+  ) => SagaIterator;
+
+  <A1, A2>(worker: (params: P, arg1: A1, arg2: A2) => Promise<R> | SagaIterator): (
+    params: P,
+    arg1: A1,
+    arg2: A2,
+  ) => SagaIterator;
+
+  <A1, A2, A3>(
+    worker: (params: P, arg1: A1, arg2: A2, arg3: A3, ...rest: any[]) => Promise<R> | SagaIterator,
+  ): (params: P, arg1: A1, arg2: A2, arg3: A3, ...rest: any[]) => SagaIterator;
+};
+
+export function bindAsyncAction(actionCreator: AsyncActionCreators<any, any, any>) {
+  return (worker: (params: any, ...args: any[]) => Promise<any> | SagaIterator) => {
+    function* boundAsyncActionSaga(params: any, ...args: any[]): SagaIterator {
+      yield put(actionCreator.started(params));
+
+      try {
+        const result = yield (call as any)(worker, params, ...args);
+        yield put(actionCreator.done({ params, result }));
+        return result;
+      } catch (error) {
+        yield put(actionCreator.failed({ params, error }));
+        // throw error
+      } finally {
+        if (yield cancelled()) {
+          yield put(actionCreator.failed({ params, error: 'cancelled' }));
+        }
+      }
+    }
+
+    const capName = worker.name.charAt(0).toUpperCase() + worker.name.substring(1);
+
+    return setFunctionName(boundAsyncActionSaga, `bound${capName}(${actionCreator.type})`);
+  };
 }
 
 /**
@@ -109,22 +109,22 @@ function setFunctionName<F extends Function>(func: F, name: string): F {
 export function takeAsyncAction<P, S, E>(
   action: ActionCreator<P>,
   asyncAction: AsyncActionCreators<P, S, E>,
-  asyncCall: (p: P) => AxiosPromise<S>
-): any
+  asyncCall: (p: P) => AxiosPromise<S>,
+): any;
 
 export function takeAsyncAction<P, S, E>(
   action: ActionCreator<P>,
   asyncAction: AsyncActionCreators<P, S, E>,
-  asyncCall: (p: P) => AxiosPromise<S>
+  asyncCall: (p: P) => AxiosPromise<S>,
 ) {
   const worker = bindAsyncAction(asyncAction)(function*(params): SagaIterator {
-    const res: AxiosResponse<S> = yield call(asyncCall, params)
-    return res.data
-  })
+    const res: AxiosResponse<S> = yield call(asyncCall, params);
+    return res.data;
+  });
 
   function* saga(sagaAction: Action<P>): SagaIterator {
-    yield fork(worker, sagaAction.payload)
+    yield fork(worker, sagaAction.payload);
   }
 
-  return takeEvery(action, saga)
+  return takeEvery(action, saga);
 }
