@@ -8,6 +8,7 @@
     "build": "cross-env TS_NODE_PROJECT=\"build/tsconfig-for-webpack-config.json\" webpack --config build/webpack.config.prd.ts",
     "lint": "eslint src --fix --ext .ts,.tsx",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "ci": "npm run lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
