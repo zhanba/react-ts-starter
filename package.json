@@ -98,7 +98,7 @@
     "@babel/polyfill": "^7.2.5",
     "antd": "^3.13.2",
     "autoprefixer": "^9.4.7",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-loader": "^8.0.5",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.3.0",
